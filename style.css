@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/rubik-regular-webfont.woff2') format('woff2'),
+         url('/fonts/rubik-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/rubik-bold-webfont.woff2') format('woff2'),
+         url('/fonts/rubik-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+button {
+    padding: 0px;
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'montserrat';
+    font-size: 16px;
+    line-height: 1;
+    min-height: 78vh;
+
+    background: var(--html);
+}
+
+img {
+    max-width: 100%;
+}
+
+:root {
+    --html: linear-gradient(to top, #160140, #261535);
+    --none: rgba(255, 255, 255, 0%);
+    --gray: #6e5f75;
+    --black: black;
+    --pink: #d4a8cf;
+    --red: red;
+    --white: white;
+    --orange: orange;
+    --yellow: rgb(193, 255, 6);
+    --gold: #f9d49a;
+    --2: #00d0a4;
+    --4: #dd7373;
+    --8: #7d53de;
+    --16: #6622cc;
+    --32: #00bfb2;
+    --64: #c06ff2;
+    --128: #340068;
+    --256: #3e92cc;
+    --512: #d8315b;
+    --1024: #1c0b19;
+    --2048: #1c0b19;
+    --border: #27163e;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 0px;
+    max-width: 1200px;
+}
+
+.controls-block {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.controls-block__header {
+    width: 400px;
+    text-align: center;
+
+    font-family: 'Rubik';
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--gold);
+}
+
+
+.controls-block__game-btn {
+    position: relative;
+
+    display: inline-block;
+    width: 90px;
+    min-height: 16px;
+    border: 5px solid var(--none);
+    margin-left: 5px;
+
+    font-family: 'Rubik';
+    font-weight: normal;
+    line-height: 1;
+    font-size: 14px;
+    color: var(--gold);
+    
+    background-color: var(--none);
+    
+    cursor: pointer;
+}
+
+.controls-block__game-btn::after{
+    position: absolute;
+
+    content: '';
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+
+    border: 2px solid var(--pink);
+
+}
+
+.controls-block__game-btn::before {
+    position: absolute;
+
+    content: '';
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    
+    border: 2px solid var(--gold);
+}
+
+.controls-block__score-block{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    margin-left: auto;
+    padding-top: 2px;
+
+    text-align: center;
+    font-family: 'Rubik';
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--128);
+
+
+    background: linear-gradient(90deg, #f9d49a, #d4a8cf);
+}
+
+.block {
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 3%;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 150px;
+
+    background-color: var(--orange);
+    box-shadow: 0 0 8px 0px var(--gold);
+}
+[class ^='cell'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 10px solid var(--border);
+
+    font-family:'Rubik';
+    font-size: 34px;
+    line-height: 1;
+    font-weight: bold;
+    color: var(--white);
+
+    background-color: var(--gray);
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+
+.active-2 {
+    background-color: var(--2);
+}
+
+.active-4 {
+    background-color: var(--4);
+}
+
+.active-8 {
+    background-color: var(--8);
+}
+
+.active-16 {
+    background-color: var(--16);
+}
+
+.active-32 {
+    background-color: var(--32);
+}
+
+.active-64 {
+    background-color: var(--64);
+}
+
+.active-128 {
+    background-color: var(--128);
+}
+
+.active-256 {
+    background-color: var(--256);
+}
+
+.active-512 {
+    background-color: var(--512);
+}
+
+.active-1024 {
+    background-color: var(--1024);
+}
+
+.active-2048 {
+    background-color: var(--2048);
+}
+
+.animated-block {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 9.6px solid var(--border);
+
+    font-family:'Rubik';
+    font-size: 34px;
+    line-height: 1;
+    font-weight: bold;
+    color: var(--white);
+}
