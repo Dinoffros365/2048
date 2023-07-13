@@ -81,10 +81,10 @@ function playGame(dirBlock) {
         let posObject = findWithoutActive();
 
         if (posObject.countActiveBlock === 16) {
-            checkOnFail();
+            isGameOver();
         }
 
-        if (!equal(matrix, matrixClone)) {
+        if (JSON.stringify(matrix) !== JSON.stringify(matrixClone)) {
             matrix[posObject.posX][posObject.posY] = 2;
             miniBlock = document.querySelector('.cellX-' + posObject.posX + '_cellY-' + posObject.posY);
             miniBlock.textContent = '2';
@@ -129,18 +129,6 @@ function removeBlock(i, j, animeBlock) {
     miniBlock.textContent = '';
     matrix[i][j] = 0;
 
-}
-
-function equal(arr, arrClone) {
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr[i].length; j++) {
-            if (arr[i][j] !== arrClone[i][j]) {
-                return false;
-            }
-        }
-    }
-
-    return true;
 }
 
 function swipeUp() {
@@ -392,37 +380,12 @@ function findWithoutActive() {
     return { 'posX': posX, 'posY': posY, 'countActiveBlock': countActiveBlock };
 }
 
-function checkOnFail() {
+function isGameOver() {
     let isCheck = false; 
 
-    outer: for (let j = 0; j < 4; j++) {
-        for (let i = 1; i < 4; i++) {
-            if (((matrix[0][j] === matrix[i][j] && matrix[i][j] > 0) || (matrix[0][j] === 0 && matrix[i][j] > 0)) && (i === 1 || (i === 2 && matrix[1][j] === 0) || (i === 3 && (matrix[1][j] + matrix[2][j] === 0)))) {
-                isCheck = true;
-                break outer;
-            }
-            else if (((matrix[1][j] === matrix[i][j] && matrix[i][j] > 0 && i > 1) || (matrix[1][j] === 0 && matrix[i][j] > 0 && i > 1)) && ((i === 2) || (i === 3 && matrix[2][j] === 0))) {
-                isCheck = true;
-                break outer;
-            }
-            else if ((matrix[2][j] === matrix[i][j] && matrix[i][j] > 0 && i > 2) || (matrix[2][j] === 0 && matrix[i][j] > 0 && i > 2)) {
-                isCheck = true;
-                break outer;
-            }
-        }
-    }
-
     outer: for (let i = 0; i < 4; i++) {
-        for (let j = 2; j > -1; j--) {
-            if (((matrix[i][3] === matrix[i][j] && matrix[i][j] > 0) || (matrix[i][3] === 0 && matrix[i][j] > 0)) && (j === 2 || (j === 1 && matrix[i][2] === 0) || (j === 0 && (matrix[i][2] + matrix[i][1] === 0)))) {
-                isCheck = true;
-                break outer;
-            }
-            else if (((matrix[i][2] === matrix[i][j] && matrix[i][j] > 0 && j < 2) || (matrix[i][2] === 0 && matrix[i][j] > 0 && j < 2)) && (j === 1 || (j === 0 && matrix[i][1] === 0))) {
-                isCheck = true;
-                break outer;
-            }
-            else if ((matrix[i][1] === matrix[i][j] && matrix[i][j] > 0 && j < 1) || (matrix[i][1] === 0 && matrix[i][j] > 0 && j < 1)) {
+        for (let j = 0; j < 3; j++) {
+            if(matrix[i][j] === matrix[i][j + 1]){
                 isCheck = true;
                 break outer;
             }
@@ -430,38 +393,14 @@ function checkOnFail() {
     }
 
     outer: for (let j = 0; j < 4; j++) {
-        for (let i = 2; i > -1; i--) {
-            if (((matrix[3][j] === matrix[i][j] && matrix[i][j] > 0) || (matrix[3][j] === 0 && matrix[i][j] > 0)) && (i === 2 || (i === 1 && matrix[2][j] === 0) || (i === 0 && (matrix[1][j] + matrix[2][j] === 0)))) {
-                isCheck = true;
-                break outer;
-            }
-            else if (((matrix[2][j] === matrix[i][j] && matrix[i][j] > 0 && i < 2) || (matrix[2][j] === 0 && matrix[i][j] > 0 && i < 2)) && ((i === 1) || (i === 0 && matrix[1][j] === 0))) {
-                isCheck = true;
-                break outer;
-            }
-            else if ((matrix[1][j] === matrix[i][j] && matrix[i][j] > 0 && i < 1) || (matrix[1][j] === 0 && matrix[i][j] > 0 && i < 1)) {
+        for (let i = 0; i < 3; i++) {
+            if(matrix[i][j] === matrix[i + 1][j]) {
                 isCheck = true;
                 break outer;
             }
         }
     }
     
-    outer: for (let i = 0; i < 4; i++) {
-        for (let j = 1; j < 4; j++) {
-            if (((matrix[i][0] === matrix[i][j] && matrix[i][j] > 0) || (matrix[i][0] === 0 && matrix[i][j] > 0)) && (j === 1 || (j === 2 && matrix[i][1] === 0) || (j === 3 && (matrix[i][1] + matrix[i][2] === 0)))) {
-                isCheck = true;
-                break outer;
-            }
-            else if (((matrix[i][1] === matrix[i][j] && matrix[i][j] > 0 && j > 1) || (matrix[i][1] === 0 && matrix[i][j] > 0 && j > 1)) && (j === 2 || (j === 3 && matrix[i][2] === 0))) {
-                isCheck = true;
-                break outer;
-            }
-            else if ((matrix[i][2] === matrix[i][j] && matrix[i][j] > 0 && j > 2) || (matrix[i][2] === 0 && matrix[i][j] > 0 && j > 2)) {
-                isCheck = true;
-                break outer;
-            }
-        }
-    }
 
     if (isCheck === false) {
         alert('Wasted');
