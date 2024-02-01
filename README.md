@@ -1,4 +1,2 @@
 # 2048
-## 2048
-2048 game
-https://dinoffros365.github.io/2048/
+## https://dinoffros365.github.io/2048/
